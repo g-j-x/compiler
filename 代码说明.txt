@@ -1,0 +1,31 @@
+对词法分析器各函数说明：
+void preInit();      //初始化关键字和关键状态
+void init();            //对正规文法初始化
+void inputEX(string rule);       //存储三型文法进入数据结构
+set<char> Closure(FA nfa, char st);       //对一个状态求闭包
+set<char> unionSet(set<char>s1,set<char>s2);        //加入闭包结果
+set<char> e_move(FA nfa,char st, char ch);                //使用子集法的move操作
+bool equalSet(set<char> s1, set<char> s2);              //使用子集法时若产生相同状态则合并
+void createNFA(string express);                                 //产生式->DFA
+FA createDFA(FA nfa); 			  //NFA->DFA
+bool isLetter(char ch);                                               //判断是否是数字
+bool isDigit(char ch);			 //判断是否是字母
+map<char,char> getTrans(char nowNode);            //从DFA中获得转换关系
+Ans runDFA(string str,int pos,int line);                       //启动识别源程序
+
+
+对语法分析器各函数说明：
+void init();                 //对正规文法初始化
+void initVt();             //初始化所有终结符
+void inputEX(string rule);   //存储二型文法进入数据结构
+void calFisrt();                    //计算FIRST集合
+void calFollow();                //计算FOLLOW集合
+void calSelect();                 //计算SELECT集合
+int get_column(string target);         //得到终结符在预测分析表的列标
+int get_row(string target);              //得到非终结符在预测分析表的行标
+void create_table();                        //建立预测分析表
+void print_table();		      //打印预测分析表（由于预测分析表过于庞大，在程序中被注释）
+vector<string> split(const string& str, const string& delim);     //处理一个token
+void deal_tokens();                       //对词法分析器得到的token表进行处理
+
+具体函数内容说明见注释（够详细）

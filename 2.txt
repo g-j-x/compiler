@@ -1,0 +1,72 @@
+S->segment S
+S->$
+segment->type def
+type->char
+type->int
+type->float
+type->void
+def->identifier idtail
+idtail->vardef deflist
+idtail->( para ) funtail
+vardef->= expr
+vardef->$
+deflist->, defdata deflist
+deflist->;
+defdata->identifier vardef
+para->type identifier paralist
+para->$
+paralist->, type identifier paralist
+paralist->$
+funtail->;
+funtail->block
+block->{ subprogram }
+subprogram->localdef subprogram
+subprogram->statement subprogram
+subprogram->$
+localdef->type defdata deflist
+altexpr->expr
+altexpr->$
+expr->assexpr
+assexpr->orexpr asstail
+asstail->= orexpr asstail
+asstail->$
+orexpr->andexpr ortail
+ortail->or andexpr ortail
+ortail->$
+andexpr->cmpexpr andtail
+andtail->and cmpexpr andtail
+andtail->$
+cmpexpr->aloexpr cmptail
+cmptail->cmps aloexpr cmptail
+cmptail->$
+cmps->>
+cmps->>=
+cmps-><
+cmps-><=
+cmps->!=
+cmps->==
+aloexpr->item alotail
+alotail->adds item alotail
+alotail->$
+adds->+
+adds->-
+item->factor itemtail
+itemtail->muls factor itemtail
+itemtail->$
+muls->*
+muls->/
+factor->( expr )
+factor->number
+factor->identifier
+statement->altexpr ;
+statement->whilestat
+statement->forstat
+statement->ifstat
+statement->return altexpr ;
+ifstat->if ( expr ) block elsestat
+elsestat->else block
+elsestat->$
+whilestat->while ( altexpr ) block
+forstat->for ( forinit altexpr ; altexpr ) block
+forinit->localdef
+forinit->altexpr ;
